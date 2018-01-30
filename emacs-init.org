@@ -21,8 +21,7 @@
 
   #+end_src
 
-** use-package installation and setup
-
+   
 ** Install use-package.
 
    #+begin_src emacs-lisp :tangle yes
@@ -43,4 +42,22 @@
    #+end_src
 
 
+* Install packages
 
+** Theme
+
+   #+begin_src emacs-lisp :tangle yes
+     (use-package zenburn-theme)
+     (load-theme 'zenburn t)
+   #+end_src
+
+
+* Settings
+
+** Font
+   
+   #+begin_src emacs-lisp :tangle yes
+     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-13" ))
+     (set-face-attribute 'default t :font "DejaVu Sans Mono-13" )
+   #+end_src
+   
