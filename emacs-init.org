@@ -19,10 +19,11 @@
 
     (package-initialize)
 
+    (package-refresh-contents)
+
   #+end_src
 
-** use-package installation and setup
-
+   
 ** Install use-package.
 
    #+begin_src emacs-lisp :tangle yes
@@ -42,5 +43,86 @@
      (setq use-package-always-ensure t)
    #+end_src
 
+
+* Install packages
+
+** Theme
+
+*** Zenburn
+
+   #+begin_src emacs-lisp :tangle yes
+     (use-package zenburn-theme)
+     (load-theme 'zenburn t)
+   #+end_src
+
+
+** Tools
+
+*** google-translate
+
+   #+begin_src emacs-lisp :tangle yes
+     (use-package google-translate
+       :defer t
+       :commands 
+         (google-translate-query-translate-reverse
+          google-translate-query-translate
+          google-translate-at-point
+          google-translate-at-point-reverse)
+       :init
+         (setq google-translate-default-source-language "en")
+         (setq google-translate-default-target-language "ru")
+       :bind
+         ("C-c t" . google-translate-at-point)
+         ("C-c T" . google-translate-query-translate)
+     )
+   #+end_src
+
+
+** Programming tools
+
+*** Magit
+
+   #+begin_src emacs-lisp :tangle yes
+     (use-package magit)
+   #+end_src
+
+
+*** markdown-mode
+ 
+   #+begin_src emacs-lisp :tangle yes
+     (use-package markdown-mode
+       :ensure t
+       :commands (markdown-mode gfm-mode)
+       :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+       :init (setq markdown-command "multimarkdown"))
+   #+end_src
+   
+
+* Settings
+
+** Fonts
+
+*** DejaVu Sans Mono 13
+   
+;;  #+begin_src emacs-lisp :tangle yes
+;;    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-13" ))
+;;    (set-face-attribute 'default t :font "DejaVu Sans Mono-13" )
+;;  #+end_src
+
+*** Anonymous Pro 14
+
+  #+begin_src emacs-lisp :tangle yes
+    (add-to-list 'default-frame-alist '(font . "Anonymous Pro-14" ))
+    (set-face-attribute 'default t :font "Anonymous Pro-14" )
+  #+end_src
+
+
+** Key bindings
+
+   #+begin_src emacs-lisp :tangle yes
+     (global-set-key (kbd "M-o") 'other-window)
+   #+end_src
 
 
