@@ -21,8 +21,11 @@
 
     (package-refresh-contents)
 
+<<<<<<< HEAD
   #+end_src
 
+=======
+>>>>>>> 174aae32d8af201fe7be8570198526753bbf3e4a
    
 ** Install use-package.
 
@@ -48,12 +51,16 @@
 
 ** Theme
 
+<<<<<<< HEAD
 *** Zenburn
 
+=======
+>>>>>>> 174aae32d8af201fe7be8570198526753bbf3e4a
    #+begin_src emacs-lisp :tangle yes
      (use-package zenburn-theme)
      (load-theme 'zenburn t)
    #+end_src
+<<<<<<< HEAD
 
 
 ** Tools
@@ -125,4 +132,16 @@
      (global-set-key (kbd "M-o") 'other-window)
    #+end_src
 
+=======
+>>>>>>> 174aae32d8af201fe7be8570198526753bbf3e4a
 
+
+* Settings
+
+** Font
+   
+   #+begin_src emacs-lisp :tangle yes
+     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-13" ))
+     (set-face-attribute 'default t :font "DejaVu Sans Mono-13" )
+   #+end_src
+   
