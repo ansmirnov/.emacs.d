@@ -100,6 +100,15 @@
    #+end_src
    
 
+** SysAdm tools
+
+*** ssh
+
+   #+begin_src emacs-lisp :tangle yes
+     (use-package ssh)
+   #+end_src
+
+
 * Settings
 
 ** Fonts
