@@ -99,13 +99,40 @@
        :init (setq markdown-command "multimarkdown"))
    #+end_src
    
+    
+* My functions
 
-** SysAdm tools
-
-*** ssh
+** org-capture-hugo
 
    #+begin_src emacs-lisp :tangle yes
-     (use-package ssh)
+     (defun org-capture-hugo-translit-char (x) 
+       (let (
+         (russian-low '(1072 1073 1074 1075 1076 1077 1105 1078 1079 1080 1081 1082 1083 1084 1085 1086 1087 1088 1089 1090 1091 1092 1093 1094 1095 1096 1097 1098 1099 1100 1101 1102 1103))
+         (russian-hig '(1040 1041 1042 1043 1044 1045 1025 1046 1047 1048 1049 1050 1051 1052 1053 1054 1055 1056 1057 1058 1059 1060 1061 1062 1063 1064 1065 1066 1067 1068 1069 1070 1071))
+         (translit '("a" "b" "v" "g" "d" "e" "yo" "zh" "z" "i" "j" "k" "l" "m" "n" "o" "p" "r" "s" "t" "u" "f" "h" "ts" "ch" "sh" "sch" "" "y" "" "e" "yu" "ya"))
+       )
+       (cond 
+         ((and (>= x 97) (<= x 122)) (char-to-string x))
+         ((and (>= x 65) (<= x 90)) (char-to-string x))
+         ((= x 32) "-")
+         ((member x russian-low) (nth (cl-position x russian-low) translit))
+         ((member x russian-hig) (nth (cl-position x russian-hig) translit))
+         )
+       )
+     )
+
+     (defun org-capture-hugo-translit-string (s) 
+       (mapconcat 'org-capture-hugo-translit-char s "")
+     )
+
+     (defun org-capture-hugo-get-body () 
+       (setq org-capture-hugo-title (read-string "Title: "))
+;;       (org-capture-hugo-title)
+     )
+
+     (defun org-capture-hugo-get-filename ()
+       (org-capture-hugo-translit-string title)
+     )
    #+end_src
 
 
@@ -132,5 +159,56 @@
 
    #+begin_src emacs-lisp :tangle yes
      (global-set-key (kbd "M-o") 'other-window)
+     (global-set-key (kbd "C-c c") 'org-capture)
+     (global-set-key [f12] 'kill-buffer-and-window) 
    #+end_src
 
+
+** Org mode
+
+*** org-capture
+
+   #+begin_src emacs-lisp :tangle yes
+
+   (setq org-capture-templates
+     '(
+       (
+         "h" 
+         "Hugo" 
+ 	 plain 
+	 (file 
+	   (concat 
+	     org-capture-hugo-notes-dir
+	     (org-capture-hugo-translit-string org-capture-hugo-title)
+	   )
+	 )
+	 (function org-capture-hugo-get-body)
+       )
+     )
+   )
+
+   #+end_src
+
+
+*** org-capture-hugo
+
+   #+begin_src emacs-lisp :tangle yes
+     (setq org-capture-hugo-notes-dir "~/as/content/")
+
+;;     (add-hook 'org-capture-before-finalize-hook (lambda () (read-string "test")))
+
+   #+end_src
+
+   
+
+** Others
+
+*** paren-mode
+
+(show-paren-mode t)
+
+*** Disable toolbar
+
+   #+begin_src emacs-lisp :tangle yes
+     (tool-bar-mode 0)
+   #+end_src
