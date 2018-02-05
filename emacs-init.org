@@ -100,6 +100,22 @@
    #+end_src
    
 
+** Programming languages
+
+*** python
+
+   #+begin_src emacs-lisp :tangle yes
+     (use-package python-mode)
+   #+end_src
+
+
+*** php
+
+   #+begin_src emacs-lisp :tangle yes
+     (use-package php-mode)
+   #+end_src
+
+
 ** Sysadm tools
 
 *** ssh
