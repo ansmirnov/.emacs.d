@@ -185,6 +185,7 @@
    #+begin_src emacs-lisp :tangle yes
      (global-set-key (kbd "M-o") 'other-window)
      (global-set-key (kbd "C-c c") 'org-capture)
+     (global-set-key [f1] 'shell) 
      (global-set-key [f12] 'kill-buffer-and-window) 
    #+end_src
 
