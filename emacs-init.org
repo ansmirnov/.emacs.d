@@ -99,6 +99,15 @@
        :init (setq markdown-command "multimarkdown"))
    #+end_src
    
+
+** Sysadm tools
+
+*** ssh
+
+   #+begin_src emacs-lisp :tangle yes
+     (use-package ssh)
+   #+end_src
+
     
 * My functions
 
