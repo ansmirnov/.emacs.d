@@ -77,6 +77,23 @@
      )
    #+end_src
 
+    
+*** ivy
+
+   #+begin_src emacs-lisp :tangle yes
+   (use-package ivy
+     :diminish ivy-mode
+     :config
+       ;; (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+       (ivy-mode t)
+       (setq ivy-count-format "%d/%d ")
+     :bind
+       (("C-c C-r" . ivy-resume)))
+   #+end_src
+
+
+
+
 
 ** Programming tools
 
