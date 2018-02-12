@@ -83,7 +83,7 @@
    #+begin_src emacs-lisp :tangle yes
    (use-package ivy
      :diminish ivy-mode
-     :config
+     :init
        ;; (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
        (ivy-mode t)
        (setq ivy-count-format "%d/%d ")
@@ -257,7 +257,10 @@
 
 *** paren-mode
 
-(show-paren-mode t)
+   #+begin_src emacs-lisp :tangle yes
+     (show-paren-mode t)
+   #+end_src
+
 
 *** Disable toolbar
 
