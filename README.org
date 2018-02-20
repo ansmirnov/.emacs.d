@@ -190,6 +190,13 @@ SSH install.
   (use-package ssh)
 #+end_src
 
+Flycheck install.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package flycheck)
+#+end_src
+
+
 
 ** Python
 
