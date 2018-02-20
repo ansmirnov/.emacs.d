@@ -14,7 +14,7 @@ To install and try this:
 2.  Clone this repo in `~/.emacs.d`:
 
 #+BEGIN_SRC 
-git clone git@gitlab.com:ansmirnov/emacs.d.git .emacs.d
+git clone https://github.com/ansmirnov/.emacs.d.git ~/.emacs.d
 #+END_SRC    
     
 3. Enjoy.
