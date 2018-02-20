@@ -3,57 +3,94 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
 
-* Package system initialization
+* Emacs initialization
 
-** Package repos
+** Package system initialization
 
-  #+begin_src emacs-lisp :tangle yes
+Add package archives:
 
-    (require 'package)
-    (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                             ("melpa" . "https://melpa.org/packages/")
-                             ;; ("marmalade" . "https://marmalade-repo.org/packages/")
-                             ;; ("org" . "http://orgmode.org/elpa/")
-                             ;; ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")
-                             ))
+#+begin_src emacs-lisp :tangle yes
+(require 'package)
 
-    (package-initialize)
+(setq package-archives '(
+    ("gnu" . "https://elpa.gnu.org/packages/")
+    ("melpa" . "https://melpa.org/packages/")
+))
 
-    (package-refresh-contents)
+(package-initialize)
 
-  #+end_src
+;;(package-refresh-contents)
+#+end_src
+
+Install =use-package= if it not installed.
+
+#+begin_src emacs-lisp :tangle yes
+(defun package-install-if-not (package)
+  "Install PACKAGE if it's not installed yet."
+  (unless (package-installed-p package)
+  (package-refresh-contents)
+  (package-install package)))
+
+(package-install-if-not 'use-package)
+
+(setq package-enable-at-startup nil)
+
+(eval-when-compile
+  (require 'use-package))
+(put 'use-package 'lisp-indent-function 1)
+(setq use-package-always-ensure t)
+#+end_src
 
 
-** Install use-package.
+
+ 
+* Global configuration
+
+** Theme and appearance
+
+I use [[https://github.com/bbatsov/zenburn-emacs][zenburn theme]]. I no change colors and other theme settings.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package zenburn-theme)
+(load-theme 'zenburn t)
+#+end_src
+
+I use Anonymous Pro font. Font size is 14.
+
+#+begin_src emacs-lisp :tangle yes
+  (add-to-list 'default-frame-alist '(font . "Anonymous Pro-14" ))
+  (set-face-attribute 'default t :font "Anonymous Pro-14" )
+#+end_src
+
+Lines below are draft.
+
+;;  #+begin_src emacs-lisp :tangle yes
+;;    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-13" ))
+;;    (set-face-attribute 'default t :font "DejaVu Sans Mono-13" )
+;;  #+end_src
+
+
+
+
+
+
+
+
+
+
+** Key bindings
 
    #+begin_src emacs-lisp :tangle yes
-     (defun package-install-if-not (package)
-       "Install PACKAGE if it's not installed yet."
-       (unless (package-installed-p package)
-         (package-refresh-contents)
-         (package-install package)))
-
-     (package-install-if-not 'use-package)
-
-     (setq package-enable-at-startup nil)
-
-     (eval-when-compile
-       (require 'use-package))
-     (put 'use-package 'lisp-indent-function 1)
-     (setq use-package-always-ensure t)
+     (global-set-key (kbd "M-o") 'other-window)
+     (global-set-key (kbd "C-c c") 'org-capture)
+     (global-set-key [f1] 'shell) 
+     (global-set-key [f12] 'kill-buffer-and-window) 
+     (global-set-key (kbd "M-m") 'magit) 
    #+end_src
 
 
-* Install packages
 
-** Theme
-
-*** Zenburn
-
-   #+begin_src emacs-lisp :tangle yes
-     (use-package zenburn-theme)
-     (load-theme 'zenburn t)
-   #+end_src
+* Install pacqkages
 
 
 ** Tools
@@ -142,108 +179,7 @@
    #+end_src
 
     
-* My functions
-
-** org-capture-hugo
-
-   #+begin_src emacs-lisp :tangle yes
-     (defun org-capture-hugo-translit-char (x) 
-       (let (
-         (russian-low '(1072 1073 1074 1075 1076 1077 1105 1078 1079 1080 1081 1082 1083 1084 1085 1086 1087 1088 1089 1090 1091 1092 1093 1094 1095 1096 1097 1098 1099 1100 1101 1102 1103))
-         (russian-hig '(1040 1041 1042 1043 1044 1045 1025 1046 1047 1048 1049 1050 1051 1052 1053 1054 1055 1056 1057 1058 1059 1060 1061 1062 1063 1064 1065 1066 1067 1068 1069 1070 1071))
-         (translit '("a" "b" "v" "g" "d" "e" "yo" "zh" "z" "i" "j" "k" "l" "m" "n" "o" "p" "r" "s" "t" "u" "f" "h" "ts" "ch" "sh" "sch" "" "y" "" "e" "yu" "ya"))
-       )
-       (cond 
-         ((and (>= x 97) (<= x 122)) (char-to-string x))
-         ((and (>= x 65) (<= x 90)) (char-to-string x))
-         ((= x 32) "-")
-         ((member x russian-low) (nth (cl-position x russian-low) translit))
-         ((member x russian-hig) (nth (cl-position x russian-hig) translit))
-         )
-       )
-     )
-
-     (defun org-capture-hugo-translit-string (s) 
-       (mapconcat 'org-capture-hugo-translit-char s "")
-     )
-
-     (defun org-capture-hugo-get-body () 
-       (setq org-capture-hugo-title (read-string "Title: "))
-;;       (org-capture-hugo-title)
-     )
-
-     (defun org-capture-hugo-get-filename ()
-       (org-capture-hugo-translit-string title)
-     )
-   #+end_src
-
-
 * Settings
-
-** Fonts
-
-*** DejaVu Sans Mono 13
-   
-;;  #+begin_src emacs-lisp :tangle yes
-;;    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-13" ))
-;;    (set-face-attribute 'default t :font "DejaVu Sans Mono-13" )
-;;  #+end_src
-
-*** Anonymous Pro 14
-
-  #+begin_src emacs-lisp :tangle yes
-    (add-to-list 'default-frame-alist '(font . "Anonymous Pro-14" ))
-    (set-face-attribute 'default t :font "Anonymous Pro-14" )
-  #+end_src
-
-
-** Key bindings
-
-   #+begin_src emacs-lisp :tangle yes
-     (global-set-key (kbd "M-o") 'other-window)
-     (global-set-key (kbd "C-c c") 'org-capture)
-     (global-set-key [f1] 'shell) 
-     (global-set-key [f12] 'kill-buffer-and-window) 
-     (global-set-key (kbd "M-m") 'magit) 
-   #+end_src
-
-
-** Org mode
-
-*** org-capture
-
-   #+begin_src emacs-lisp :tangle yes
-
-   (setq org-capture-templates
-     '(
-       (
-         "h" 
-         "Hugo" 
- 	 plain 
-	 (file 
-	   (concat 
-	     org-capture-hugo-notes-dir
-	     (org-capture-hugo-translit-string org-capture-hugo-title)
-	   )
-	 )
-	 (function org-capture-hugo-get-body)
-       )
-     )
-   )
-
-   #+end_src
-
-
-*** org-capture-hugo
-
-   #+begin_src emacs-lisp :tangle yes
-     (setq org-capture-hugo-notes-dir "~/as/content/")
-
-;;     (add-hook 'org-capture-before-finalize-hook (lambda () (read-string "test")))
-
-   #+end_src
-
-   
 
 ** Print
 
