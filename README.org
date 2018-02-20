@@ -135,7 +135,7 @@ Use Google Translate for translate text from region.
    #+end_src
 
 
-** Auto competition
+** Auto completion
 
 I use Ivy.
 
