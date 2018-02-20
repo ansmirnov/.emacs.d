@@ -12,10 +12,10 @@ To install and try this:
 1.  Remove or rename `~/.emacs.d` directory.
 
 2.  Clone this repo in `~/.emacs.d`:
-    
-    ```
-    git clone git@gitlab.com:ansmirnov/emacs.d.git .emacs.d
-    ```
+
+#+BEGIN_SRC 
+git clone git@gitlab.com:ansmirnov/emacs.d.git .emacs.d
+#+END_SRC    
     
 3. Enjoy.
 
@@ -60,7 +60,7 @@ Install =use-package= if it not installed.
 
 
 
- 
+
 * Global configuration
 
 ** Theme and appearance
