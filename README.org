@@ -27,38 +27,36 @@ git clone https://github.com/ansmirnov/.emacs.d.git ~/.emacs.d
 Add package archives:
 
 #+begin_src emacs-lisp :tangle yes
-(require 'package)
+  (require 'package)
 
-(setq package-archives '(
-    ("gnu" . "https://elpa.gnu.org/packages/")
-    ("melpa" . "https://melpa.org/packages/")
-))
+  (setq package-archives '(
+      ("gnu" . "https://elpa.gnu.org/packages/")
+      ("melpa" . "https://melpa.org/packages/")
+  ))
 
-(package-initialize)
+  (package-initialize)
 
-;;(package-refresh-contents)
+  ;;(package-refresh-contents)
 #+end_src
 
 Install =use-package= if it not installed.
 
 #+begin_src emacs-lisp :tangle yes
-(defun package-install-if-not (package)
-  "Install PACKAGE if it's not installed yet."
-  (unless (package-installed-p package)
-  (package-refresh-contents)
-  (package-install package)))
+  (defun package-install-if-not (package)
+    "Install PACKAGE if it's not installed yet."
+    (unless (package-installed-p package)
+    (package-refresh-contents)
+    (package-install package)))
 
-(package-install-if-not 'use-package)
+  (package-install-if-not 'use-package)
 
-(setq package-enable-at-startup nil)
+  (setq package-enable-at-startup nil)
 
-(eval-when-compile
-  (require 'use-package))
-(put 'use-package 'lisp-indent-function 1)
-(setq use-package-always-ensure t)
+  (eval-when-compile
+    (require 'use-package))
+  (put 'use-package 'lisp-indent-function 1)
+  (setq use-package-always-ensure t)
 #+end_src
-
-
 
 
 * Global configuration
@@ -68,8 +66,8 @@ Install =use-package= if it not installed.
 I use [[https://github.com/bbatsov/zenburn-emacs][zenburn theme]]. I no change colors and other theme settings.
 
 #+begin_src emacs-lisp :tangle yes
-(use-package zenburn-theme)
-(load-theme 'zenburn t)
+  (use-package zenburn-theme)
+  (load-theme 'zenburn t)
 #+end_src
 
 I use Anonymous Pro font. Font size is 14.
@@ -77,6 +75,12 @@ I use Anonymous Pro font. Font size is 14.
 #+begin_src emacs-lisp :tangle yes
   (add-to-list 'default-frame-alist '(font . "Anonymous Pro-14" ))
   (set-face-attribute 'default t :font "Anonymous Pro-14" )
+#+end_src
+
+Disable excess toolbar.
+
+#+begin_src emacs-lisp :tangle yes
+  (tool-bar-mode 0)
 #+end_src
 
 Lines below are draft.
@@ -87,136 +91,116 @@ Lines below are draft.
 ;;  #+end_src
 
 
-
-
-
-
-
-
-
-
 ** Key bindings
 
-   #+begin_src emacs-lisp :tangle yes
-     (global-set-key (kbd "M-o") 'other-window)
-     (global-set-key (kbd "C-c c") 'org-capture)
-     (global-set-key [f1] 'shell) 
-     (global-set-key [f12] 'kill-buffer-and-window) 
-     (global-set-key (kbd "M-m") 'magit) 
+#+begin_src emacs-lisp :tangle yes
+  (global-set-key (kbd "M-o") 'other-window)
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (global-set-key [f1] 'shell) 
+  (global-set-key [f12] 'kill-buffer-and-window) 
+  (global-set-key (kbd "M-m") 'magit) 
+#+end_src
+
+
+** Printing
+
+I use emacs for printing.
+
+This settings makes imprints beautiful.
+
+#+begin_src emacs-lisp :tangle yes
+  (setq lpr-switches '("-o cpi=11" "-o page-left=54"))
+#+end_src
+
+
+** Translate text using Google Translate
+
+Use Google Translate for translate text from region.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package google-translate
+    :defer t
+    :commands 
+    (google-translate-query-translate-reverse
+            google-translate-query-translate
+            google-translate-at-point
+            google-translate-at-point-reverse)
+         :init
+           (setq google-translate-default-source-language "en")
+           (setq google-translate-default-target-language "ru")
+         :bind
+           ("C-c t" . google-translate-at-point)
+           ("C-c T" . google-translate-query-translate)
+       )
    #+end_src
 
 
+** Auto competition
 
-* Install pacqkages
+I use Ivy.
 
-
-** Tools
-
-*** google-translate
-
-   #+begin_src emacs-lisp :tangle yes
-     (use-package google-translate
-       :defer t
-       :commands 
-         (google-translate-query-translate-reverse
-          google-translate-query-translate
-          google-translate-at-point
-          google-translate-at-point-reverse)
-       :init
-         (setq google-translate-default-source-language "en")
-         (setq google-translate-default-target-language "ru")
-       :bind
-         ("C-c t" . google-translate-at-point)
-         ("C-c T" . google-translate-query-translate)
-     )
-   #+end_src
-
-    
-*** ivy
-
-   #+begin_src emacs-lisp :tangle yes
-   (use-package ivy
-     :diminish ivy-mode
-     :init
-       ;; (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
-       (ivy-mode t)
-       (setq ivy-count-format "%d/%d ")
-     :bind
-       (("C-c C-r" . ivy-resume)))
-   #+end_src
+#+begin_src emacs-lisp :tangle yes
+  (use-package ivy
+    :diminish ivy-mode
+    :init
+      ;; (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+      (ivy-mode t)
+      (setq ivy-count-format "%d/%d ")
+    :bind
+      (("C-c C-r" . ivy-resume)))
+#+end_src
 
 
+** Common tools
+
+Code for backlighting of pairwise brackets.
+
+#+begin_src emacs-lisp :tangle yes
+  (show-paren-mode t)
+#+end_src
+
+Magit install.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package magit)
+#+end_src
+
+SSH install.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package ssh)
+#+end_src
+
+
+* Programming
+
+** Python
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package python-mode)
+#+end_src
+
+
+** PHP
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package php-mode)
+#+end_src
+
+
+* Documentation
+
+Add markdown support.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package markdown-mode
+    :ensure t
+    :commands (markdown-mode gfm-mode)
+    :mode (("README\\.md\\'" . gfm-mode)
+      ("\\.md\\'" . markdown-mode)
+      ("\\.markdown\\'" . markdown-mode))
+    :init (setq markdown-command "multimarkdown"))
+#+end_src
 
 
 
-** Programming tools
-
-*** Magit
-
-   #+begin_src emacs-lisp :tangle yes
-     (use-package magit)
-   #+end_src
-
-
-*** markdown-mode
- 
-   #+begin_src emacs-lisp :tangle yes
-     (use-package markdown-mode
-       :ensure t
-       :commands (markdown-mode gfm-mode)
-       :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-       :init (setq markdown-command "multimarkdown"))
-   #+end_src
-   
-
-** Programming languages
-
-*** python
-
-   #+begin_src emacs-lisp :tangle yes
-     (use-package python-mode)
-   #+end_src
-
-
-*** php
-
-   #+begin_src emacs-lisp :tangle yes
-     (use-package php-mode)
-   #+end_src
-
-
-** Sysadm tools
-
-*** ssh
-
-   #+begin_src emacs-lisp :tangle yes
-     (use-package ssh)
-   #+end_src
-
-    
-* Settings
-
-** Print
-
-   #+begin_src emacs-lisp :tangle yes
-     (setq lpr-switches '("-o cpi=11" "-o page-left=54"))
-   #+end_src
-
-   
-
-** Others
-
-*** paren-mode
-
-   #+begin_src emacs-lisp :tangle yes
-     (show-paren-mode t)
-   #+end_src
-
-
-*** Disable toolbar
-
-   #+begin_src emacs-lisp :tangle yes
-     (tool-bar-mode 0)
-   #+end_src
