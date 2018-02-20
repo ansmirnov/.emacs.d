@@ -3,6 +3,23 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
 
+* README
+
+This is my emacs configuration.
+
+To install and try this:
+
+1.  Remove or rename `~/.emacs.d` directory.
+
+2.  Clone this repo in `~/.emacs.d`:
+    
+    ```
+    git clone git@gitlab.com:ansmirnov/emacs.d.git .emacs.d
+    ```
+    
+3. Enjoy.
+
+
 * Emacs initialization
 
 ** Package system initialization
