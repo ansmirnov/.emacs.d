@@ -61,6 +61,15 @@ Install =use-package= if it not installed.
 
 * Global configuration
 
+** Common packages
+
+I did not use diminish now.
+
+#+begin_src emacs-lisp :tangle yes
+;;  (use-package diminish)
+#+end_src
+
+
 ** Theme and appearance
 
 I use [[https://github.com/bbatsov/zenburn-emacs][zenburn theme]]. I no change colors and other theme settings.
@@ -96,9 +105,8 @@ Lines below are draft.
 #+begin_src emacs-lisp :tangle yes
   (global-set-key (kbd "M-o") 'other-window)
   (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key [f1] 'shell) 
-  (global-set-key [f12] 'kill-buffer-and-window) 
-  (global-set-key (kbd "M-m") 'magit) 
+  (global-set-key [f12] 'shell) 
+  (global-set-key [f8] 'kill-buffer-and-window) 
 #+end_src
 
 
@@ -137,8 +145,6 @@ Use Google Translate for translate text from region.
 
 ** Auto completion
 
-I use Ivy.
-
 #+begin_src emacs-lisp :tangle yes
   (use-package ivy
     :diminish ivy-mode
@@ -150,6 +156,17 @@ I use Ivy.
       (("C-c C-r" . ivy-resume)))
 #+end_src
 
+Company mode for auto completion in any buffer.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package company
+    :diminish company-mode
+    :hook
+    (after-init . global-company-mode))
+#+end_src
+
+
+* Programming
 
 ** Common tools
 
@@ -162,7 +179,9 @@ Code for backlighting of pairwise brackets.
 Magit install.
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package magit)
+  (use-package magit
+    :bind 
+  ("M-m" . magit) )
 #+end_src
 
 SSH install.
@@ -171,8 +190,6 @@ SSH install.
   (use-package ssh)
 #+end_src
 
-
-* Programming
 
 ** Python
 
@@ -201,6 +218,7 @@ Add markdown support.
       ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "multimarkdown"))
 #+end_src
+
 
 
 
