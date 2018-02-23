@@ -207,9 +207,38 @@ Flycheck install.
 
 ** Python
 
-#+begin_src emacs-lisp :tangle yes
-  (use-package python-mode)
-#+end_src
+Python settings copied from
+https://github.com/Schnouki/dotfiles/blob/master/emacs/init-40-python.el
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package flycheck-local-flake8
+  :load-path "flycheck-local-flake8"
+  :commands flycheck-local-flake8/flycheck-virtualenv-set-python-executables
+  :init
+  (add-hook 'flycheck-before-syntax-check-hook
+	    #'flycheck-local-flake8/flycheck-virtualenv-set-python-executables 'local))
+
+(use-package anaconda-mode
+  :ensure t
+  :commands anaconda-mode
+  :diminish anaconda-mode
+  :init
+  (progn
+    (add-hook 'python-mode-hook 'anaconda-mode)
+    (add-hook 'python-mode-hook 'eldoc-mode)))
+
+(use-package company-anaconda
+  :ensure t
+  :init 
+  (with-eval-after-load 'company
+    (add-to-list 'company-backends 'company-anaconda)))
+
+(use-package py-autopep8
+  :ensure t
+  :commands (py-autopep8-enable-on-save py-autopep8-buffer)
+  :init
+  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))
+#+END_SRC
 
 
 ** PHP
