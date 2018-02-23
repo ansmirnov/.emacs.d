@@ -166,6 +166,13 @@ Company mode for auto completion in any buffer.
 #+end_src
 
 
+** Projects
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package projectile)
+#+END_SRC
+
+
 * Programming
 
 ** Common tools
