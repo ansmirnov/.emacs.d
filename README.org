@@ -229,3 +229,13 @@ Add markdown support.
 
 
 
+
+* Org mode
+
+To fast adding code blocks in emacs config.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (add-to-list 'org-structure-template-alist
+  (list "el" "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC" "<src lang=\"?\">\n\n</src>")
+  )
+#+END_SRC
