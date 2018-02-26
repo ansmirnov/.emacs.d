@@ -179,8 +179,11 @@ Company mode for auto completion in any buffer.
 
 Code for backlighting of pairwise brackets.
 
+Electric pair mode will automatically add closing brackets.
+
 #+begin_src emacs-lisp :tangle yes
-  (show-paren-mode t)
+  (show-paren-mode t) 
+  (electric-pair-mode t)
 #+end_src
 
 Magit install.
@@ -203,7 +206,7 @@ Flycheck install.
 (use-package flycheck
   :ensure t
   :init
-  (add-hook 'after-init-hook #'global-flycheck-mode)
+  (add-hook 'after-init-hook 'global-flycheck-mode)
 )
 #+end_src
 
