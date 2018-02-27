@@ -294,3 +294,14 @@ To fast adding code blocks in emacs config.
   (list "el" "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC" "<src lang=\"?\">\n\n</src>")
   )
 #+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)
+   (sh . t)
+))
+#+END_SRC
+
