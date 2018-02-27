@@ -109,6 +109,7 @@ Better defaults package breaks Ivy. I try to copy it code in my emacs config.
 
 #+END_SRC
 
+
 ** Theme and appearance
 
 I use [[https://github.com/bbatsov/zenburn-emacs][zenburn theme]]. I no change colors and other theme settings.
@@ -144,9 +145,10 @@ Lines below are draft.
 #+begin_src emacs-lisp :tangle yes
   (global-set-key (kbd "M-o") 'other-window)
   (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key [f12] 'shell) 
+  (global-set-key [f2] 'save-buffer)
+  (global-set-key [f3] 'find-file)
   (global-set-key [f8] 'kill-buffer-and-window) 
-  (global-set-key (kbd "C-x C-f") 'find-file) 
+  (global-set-key [f12] 'shell) 
 #+end_src
 
 
@@ -295,13 +297,14 @@ To fast adding code blocks in emacs config.
   )
 #+END_SRC
 
+(use-package ob-ipython)
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    (python . t)
+   (ipython . t)
    (sh . t)
 ))
 #+END_SRC
-
