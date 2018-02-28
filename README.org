@@ -269,7 +269,12 @@ Flycheck install.
 
 ** Python
 
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package python-mode)
+
+(use-package ein)
+#+END_SRC
+
 
 ** PHP
 
