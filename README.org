@@ -220,6 +220,13 @@ Company mode for auto completion in any buffer.
 #+END_SRC
 
 
+** Change "yes or no" to "y or n"
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+
 * Programming
 
 ** Common tools
