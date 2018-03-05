@@ -18,8 +18,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ob-ipython markdown-mode php-mode ein elpy flycheck ssh magit reverse-im company ivy google-translate zenburn-theme use-package)))
- '(reverse-im-input-methods (quote ("russian-computer"))))
+    (ob-ipython markdown-mode php-mode ein elpy flycheck ssh magit reverse-im company ivy google-translate zenburn-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

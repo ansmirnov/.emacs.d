@@ -147,7 +147,6 @@ Lines below are draft.
 
 #+begin_src emacs-lisp :tangle yes
   (global-set-key (kbd "M-o") 'other-window)
-  (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key [f2] 'save-buffer)
   (global-set-key [f3] 'find-file)
   (global-set-key [f8] 'kill-buffer-and-window) 
@@ -315,6 +314,23 @@ Add markdown support.
 
 * Org mode
 
+** Setup org files
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-directory "~/as")
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
+#+END_SRC
+
+
+** Global key bindings
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(global-set-key (kbd "C-c c") 'org-capture)
+#+END_SRC
+
+
+** Org babel
+
 To fast adding code blocks in emacs config.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -323,7 +339,11 @@ To fast adding code blocks in emacs config.
   )
 #+END_SRC
 
+IPython support.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
+(setq ob-ipython-command "~/anaconda3/bin/jupyter") 
+
 (use-package ob-ipython)
 
 (org-babel-do-load-languages
