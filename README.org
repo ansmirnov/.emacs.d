@@ -25,6 +25,7 @@ git clone https://github.com/ansmirnov/.emacs.d.git ~/.emacs.d
 (setq user-full-name "Andrey Smirnov"
       user-mail-address "mail@ansmirnov.ru")
   
+
 * Global configuration
 
 ** Package system initialization
@@ -228,6 +229,15 @@ Company mode for auto completion in any buffer.
 #+END_SRC
 
 
+** Russian keyboard
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package reverse-im
+  :config
+  (reverse-im-activate "russian-computer"))
+#+END_SRC
+
+
 * Programming
 
 ** Common tools
@@ -270,7 +280,9 @@ Flycheck install.
 ** Python
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package python-mode)
+;;(use-package python-mode)
+
+(use-package elpy)
 
 (use-package ein)
 #+END_SRC
@@ -311,9 +323,9 @@ To fast adding code blocks in emacs config.
   )
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ob-ipython)
 
-#+BEGIN_SRC emacs-lisp :tangle yes
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
