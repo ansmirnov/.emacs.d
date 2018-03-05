@@ -318,16 +318,24 @@ Add markdown support.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (setq org-directory "~/as")
+(setq org-agenda-files (list "~/as/tasks.org"))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 #+END_SRC
 
+** Refile
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-refile-use-outline-path t)
+(setq org-refile-targets
+      '((org-agenda-files . (:maxlevel . 4))))
+(setq org-outline-path-complete-in-steps nil)
+#+END_SRC
 
 ** Global key bindings
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (global-set-key (kbd "C-c c") 'org-capture)
 #+END_SRC
-
 
 ** Org babel
 
