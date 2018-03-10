@@ -135,6 +135,12 @@ Disable excess toolbar.
   (tool-bar-mode 0)
 #+end_src
 
+Full screen.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (toggle-frame-fullscreen)
+#+END_SRC
+
 Lines below are draft.
 
 ;;  #+begin_src emacs-lisp :tangle yes
