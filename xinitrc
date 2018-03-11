@@ -15,7 +15,7 @@ xset r rate 200 60
 
 xss-lock -- slock &
 
-xautolock -time 10 -locker slock &
+xautolock -time 10 -locker "systemctl suspend -i" &
 
 # Start Emac
 exec dbus-launch --exit-with-session emacs
