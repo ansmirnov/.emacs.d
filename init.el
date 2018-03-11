@@ -21,7 +21,7 @@
     ("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" default)))
  '(package-selected-packages
    (quote
-    (material-theme ob-ipython markdown-mode php-mode ein elpy flycheck ssh magit reverse-im company ivy google-translate zenburn-theme use-package))))
+    (emms material-theme ob-ipython markdown-mode php-mode ein elpy flycheck ssh magit reverse-im company ivy google-translate zenburn-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
