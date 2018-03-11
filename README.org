@@ -23,8 +23,10 @@ git clone https://github.com/ansmirnov/.emacs.d.git ~/.emacs.d
 
 * Personal information
 
+#+BEGIN_SRC emacs-lisp :tangle yes
 (setq user-full-name "Andrey Smirnov"
       user-mail-address "mail@ansmirnov.ru")
+#+END_SRC
   
 
 * Global configuration
