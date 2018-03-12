@@ -1,3 +1,4 @@
+
 #+TITLE: Emacs Config
 #+INFOJS_OPT: view:t toc:t ltoc:t mouse:underline buttons:0 path:https://www.linux.org.ru/tango/combined.css
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
@@ -22,8 +23,10 @@ git clone https://github.com/ansmirnov/.emacs.d.git ~/.emacs.d
 
 * Personal information
 
+#+BEGIN_SRC emacs-lisp :tangle yes
 (setq user-full-name "Andrey Smirnov"
       user-mail-address "mail@ansmirnov.ru")
+#+END_SRC
   
 
 * Global configuration
@@ -115,11 +118,12 @@ Better defaults package breaks Ivy. I try to copy it code in my emacs config.
 
 ** Theme and appearance
 
-I use [[https://github.com/bbatsov/zenburn-emacs][zenburn theme]]. I no change colors and other theme settings.
+I use different themes on some devices.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package zenburn-theme)
-  (load-theme 'zenburn t)
+  (use-package material-theme)
+;;  (load-theme 'zenburn t)
 #+end_src
 
 I use Anonymous Pro font. Font size is 14.
@@ -135,6 +139,12 @@ Disable excess toolbar.
   (tool-bar-mode 0)
 #+end_src
 
+Full screen.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (toggle-frame-fullscreen)
+#+END_SRC
+
 Lines below are draft.
 
 ;;  #+begin_src emacs-lisp :tangle yes
@@ -147,10 +157,9 @@ Lines below are draft.
 
 #+begin_src emacs-lisp :tangle yes
   (global-set-key (kbd "M-o") 'other-window)
-  (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key [f2] 'save-buffer)
   (global-set-key [f3] 'find-file)
-  (global-set-key [f8] 'kill-buffer-and-window) 
+  (global-set-key [pause] 'kill-buffer-and-window) 
   (global-set-key [f12] 'shell) 
 #+end_src
 
@@ -313,6 +322,69 @@ Add markdown support.
 
 
 
+* EXWM
+
+Require packages.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (require 'exwm)
+  (require 'exwm-config)
+#+END_SRC
+
+Config. Copied from default  
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun my/exwm-config ()
+  "Default configuration of EXWM."
+  ;; Set the initial workspace number.
+  (setq exwm-workspace-number 4)
+  ;; Make class name the buffer name
+  (add-hook 'exwm-update-class-hook
+            (lambda ()
+              (exwm-workspace-rename-buffer exwm-class-name)))
+  ;; 's-r': Reset
+  (exwm-input-set-key (kbd "s-r") #'exwm-reset)
+  ;; 's-w': Switch workspace
+  (exwm-input-set-key (kbd "s-w") #'exwm-workspace-switch)
+  ;; 's-N': Switch to certain workspace
+  (dotimes (i 10)
+    (exwm-input-set-key (kbd (format "s-%d" i))
+                        `(lambda ()
+                           (interactive)
+                           (exwm-workspace-switch-create ,i))))
+  ;; 's-&': Launch application
+  (exwm-input-set-key (kbd "s-&")
+                      (lambda (command)
+                        (interactive (list (read-shell-command "$ ")))
+                        (start-process-shell-command command nil command)))
+  ;; Line-editing shortcuts
+  (setq exwm-input-simulation-keys
+        '(([?\C-b] . [left])
+          ([?\C-f] . [right])
+          ([?\C-p] . [up])
+          ([?\C-n] . [down])
+          ([?\C-a] . [home])
+          ([?\C-e] . [end])
+          ([?\M-v] . [prior])
+          ([?\C-v] . [next])
+          ([?\C-d] . [delete])
+          ([?\C-k] . [S-end delete])))
+  ;; Enable EXWM
+  (exwm-enable)
+  ;; Configure Ido
+ ;; (exwm-config-ido)
+  ;; Other configurations
+  (exwm-config-misc))
+
+#+END_SRC
+
+Apply settings.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(my/exwm-config)
+#+END_SRC
+
+
 * Org mode
 
 ** Setup org files
@@ -322,13 +394,20 @@ Add markdown support.
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 #+END_SRC
 
+** Refile
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-refile-use-outline-path t)
+(setq org-refile-targets
+      '((org-agenda-files . (:maxlevel . 4))))
+(setq org-outline-path-complete-in-steps nil)
+#+END_SRC
+
 ** Global key bindings
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq org-directory "~/as")
-(setq org-default-notes-file (concat org-directory "/notes.org"))
+(global-set-key (kbd "C-c c") 'org-capture)
 #+END_SRC
-
 
 ** Org babel
 
