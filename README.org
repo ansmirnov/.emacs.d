@@ -315,6 +315,23 @@ Add markdown support.
 
 * Org mode
 
+** Setup org files
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-directory "~/as")
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
+#+END_SRC
+
+** Global key bindings
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-directory "~/as")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+#+END_SRC
+
+
+** Org babel
+
 To fast adding code blocks in emacs config.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -323,7 +340,11 @@ To fast adding code blocks in emacs config.
   )
 #+END_SRC
 
+IPython support.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
+(setq ob-ipython-command "~/anaconda3/bin/jupyter") 
+
 (use-package ob-ipython)
 
 (org-babel-do-load-languages
