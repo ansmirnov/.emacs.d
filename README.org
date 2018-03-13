@@ -68,6 +68,14 @@ Install =use-package= if it not installed.
 #+end_src
 
 
+** Configuration settings
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+#+END_SRC
+
+
 ** Better defaults
 
 Better defaults package breaks Ivy. I try to copy it code in my emacs config.
@@ -143,6 +151,19 @@ Full screen.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (toggle-frame-fullscreen)
+#+END_SRC
+
+Display time and mail flag.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq display-time-24hr-format t)
+(display-time)
+#+END_SRC
+
+Display laptop battery status.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(display-battery-mode t)
 #+END_SRC
 
 Lines below are draft.
