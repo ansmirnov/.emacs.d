@@ -166,6 +166,16 @@ Display laptop battery status.
 (display-battery-mode t)
 #+END_SRC
 
+Powerline
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package powerline
+:config
+(powerline-default-theme)
+)
+
+#+END_SRC
+
 Lines below are draft.
 
 ;;  #+begin_src emacs-lisp :tangle yes
@@ -478,6 +488,13 @@ IPython support.
 ))
 #+END_SRC
 
+** GTD Settings
+
+TODO keywords
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-todo-keywords '((sequence "TODO" "REVIEW" "DONE")))
+#+END_SRC
 
 * Email
 
