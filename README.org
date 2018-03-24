@@ -82,14 +82,6 @@ Better defaults package breaks Ivy. I try to copy it code in my emacs config.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (progn
-  (menu-bar-mode -1)
-  (when (fboundp 'tool-bar-mode)
-    (tool-bar-mode -1))
-  (when (fboundp 'scroll-bar-mode)
-    (scroll-bar-mode -1))
-  (when (fboundp 'horizontal-scroll-bar-mode)
-    (horizontal-scroll-bar-mode -1))
-
   (autoload 'zap-up-to-char "misc"
     "Kill up to, but not including ARGth occurrence of CHAR." t)
 
@@ -122,66 +114,6 @@ Better defaults package breaks Ivy. I try to copy it code in my emacs config.
                                                  "backups")))))
 
 #+END_SRC
-
-
-** Theme and appearance
-
-I use different themes on some devices.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package zenburn-theme)
-  (use-package material-theme)
-;;  (load-theme 'zenburn t)
-#+end_src
-
-I use Anonymous Pro font. Font size is 14.
-
-#+begin_src emacs-lisp :tangle yes
-  (add-to-list 'default-frame-alist '(font . "Anonymous Pro-14" ))
-  (set-face-attribute 'default t :font "Anonymous Pro-14" )
-#+end_src
-
-Disable excess toolbar.
-
-#+begin_src emacs-lisp :tangle yes
-  (tool-bar-mode 0)
-#+end_src
-
-Full screen.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (toggle-frame-fullscreen)
-#+END_SRC
-
-Display time and mail flag.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq display-time-24hr-format t)
-(display-time)
-#+END_SRC
-
-Display laptop battery status.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(display-battery-mode t)
-#+END_SRC
-
-Powerline
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package powerline
-:config
-(powerline-default-theme)
-)
-
-#+END_SRC
-
-Lines below are draft.
-
-;;  #+begin_src emacs-lisp :tangle yes
-;;    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-13" ))
-;;    (set-face-attribute 'default t :font "DejaVu Sans Mono-13" )
-;;  #+end_src
 
 
 ** Key bindings
@@ -276,6 +208,81 @@ Company mode for auto completion in any buffer.
   :config
   (reverse-im-activate "russian-computer"))
 #+END_SRC
+
+
+* Theme and appearance
+
+** Themes
+
+I use different themes on some devices.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package zenburn-theme)
+  (use-package material-theme)
+;;  (load-theme 'zenburn t)
+#+end_src
+
+** Fonts
+
+I use Anonymous Pro font. Font size is 14.
+
+#+begin_src emacs-lisp :tangle yes
+  (add-to-list 'default-frame-alist '(font . "Anonymous Pro-14" ))
+  (set-face-attribute 'default t :font "Anonymous Pro-14" )
+#+end_src
+
+** Window
+
+Disable menubar, toolbar. scrolls bar.
+
+#+begin_src emacs-lisp :tangle yes
+  (menu-bar-mode -1)
+  (when (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+  (when (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
+  (when (fboundp 'horizontal-scroll-bar-mode)
+    (horizontal-scroll-bar-mode -1))
+#+end_src
+
+Full screen.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (toggle-frame-fullscreen)
+#+END_SRC
+
+** Statusbar
+
+Display time and mail flag.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq display-time-24hr-format t)
+(display-time)
+#+END_SRC
+
+Display laptop battery status.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(display-battery-mode t)
+#+END_SRC
+
+Powerline
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package powerline
+:config
+(powerline-default-theme)
+)
+
+#+END_SRC
+
+Lines below are draft.
+
+;;  #+begin_src emacs-lisp :tangle yes
+;;    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-13" ))
+;;    (set-face-attribute 'default t :font "DejaVu Sans Mono-13" )
+;;  #+end_src
+
 
 
 * Programming
@@ -526,3 +533,4 @@ TODO keywords
 )
 
 #+END_SRC
+
