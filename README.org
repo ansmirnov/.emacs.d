@@ -351,12 +351,12 @@ Add anaconda venv.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package lsp-python
-:hook
-    (python-mode . lsp-python-enable)
-:config
-    (setq lsp-response-timeout 60)
-)
+;;(use-package lsp-python
+;;:hook
+;;    (python-mode . lsp-python-enable)
+;;:config
+;;    (setq lsp-response-timeout 60)
+;;)
 #+END_SRC
 
 For connecting to ipython notebooks server.
@@ -365,6 +365,16 @@ For connecting to ipython notebooks server.
 (use-package ein)
 #+END_SRC
 
+Company Jedi
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package company-jedi)
+
+(defun my/python-mode-hook ()
+  (add-to-list 'company-backends 'company-jedi))
+
+(add-hook 'python-mode-hook 'my/python-mode-hook)
+#+END_SRC
 
 ** PHP
 
