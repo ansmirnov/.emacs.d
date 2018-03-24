@@ -324,17 +324,6 @@ Flycheck install.
 
 
 
-** LSP
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package lsp-mode)
-(use-package lsp-ui
-:hook
-    (lsp-mode . lsp-ui-mode)
-)
-#+END_SRC
-
-
 ** Python
 
 Add anaconda venv.
@@ -344,37 +333,12 @@ Add anaconda venv.
 (setq exec-path (append exec-path '("~/anaconda3/bin/")))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package python-mode)
+Install elpy.
 
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package elpy)
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :tangle yes
-;;(use-package lsp-python
-;;:hook
-;;    (python-mode . lsp-python-enable)
-;;:config
-;;    (setq lsp-response-timeout 60)
-;;)
-#+END_SRC
-
-For connecting to ipython notebooks server.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ein)
-#+END_SRC
-
-Company Jedi
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package company-jedi)
-
-(defun my/python-mode-hook ()
-  (add-to-list 'company-backends 'company-jedi))
-
-(add-hook 'python-mode-hook 'my/python-mode-hook)
-#+END_SRC
 
 ** PHP
 
