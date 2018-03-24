@@ -324,13 +324,44 @@ Flycheck install.
 
 
 
-** Python
+** LSP
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-;;(use-package python-mode)
+(use-package lsp-mode)
+(use-package lsp-ui
+:hook
+    (lsp-mode . lsp-ui-mode)
+)
+#+END_SRC
+
+
+** Python
+
+Add anaconda venv.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setenv "PATH" (concat (getenv "PATH") "~/anaconda3/bin/"))
+(setq exec-path (append exec-path '("~/anaconda3/bin/")))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package python-mode)
 
 (use-package elpy)
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package lsp-python
+:hook
+    (python-mode . lsp-python-enable)
+:config
+    (setq lsp-response-timeout 60)
+)
+#+END_SRC
+
+For connecting to ipython notebooks server.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ein)
 #+END_SRC
 
@@ -355,6 +386,65 @@ Add markdown support.
       ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "multimarkdown"))
 #+end_src
+
+
+* Org mode
+
+** Setup org files
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-directory "~/as")
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
+#+END_SRC
+
+** Refile
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-refile-use-outline-path t)
+(setq org-refile-targets
+      '((org-agenda-files . (:maxlevel . 4))))
+(setq org-outline-path-complete-in-steps nil)
+#+END_SRC
+
+** Global key bindings
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(global-set-key (kbd "C-c c") 'org-capture)
+#+END_SRC
+
+** Org babel
+
+To fast adding code blocks in emacs config.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (add-to-list 'org-structure-template-alist
+  (list "el" "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC" "<src lang=\"?\">\n\n</src>")
+  )
+#+END_SRC
+
+IPython support.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq ob-ipython-command "~/anaconda3/bin/jupyter") 
+
+(use-package ob-ipython)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)
+   (ipython . t)
+   (sh . t)
+))
+#+END_SRC
+
+** GTD Settings
+
+TODO keywords
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-todo-keywords '((sequence "TODO" "REVIEW" "DONE")))
+#+END_SRC
 
 
 
@@ -442,65 +532,6 @@ Apply settings.
 
 #+BEGIN_SRC sh :tangle test
 test
-#+END_SRC
-
-
-* Org mode
-
-** Setup org files
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq org-directory "~/as")
-(setq org-default-notes-file (concat org-directory "/inbox.org"))
-#+END_SRC
-
-** Refile
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq org-refile-use-outline-path t)
-(setq org-refile-targets
-      '((org-agenda-files . (:maxlevel . 4))))
-(setq org-outline-path-complete-in-steps nil)
-#+END_SRC
-
-** Global key bindings
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(global-set-key (kbd "C-c c") 'org-capture)
-#+END_SRC
-
-** Org babel
-
-To fast adding code blocks in emacs config.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (add-to-list 'org-structure-template-alist
-  (list "el" "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC" "<src lang=\"?\">\n\n</src>")
-  )
-#+END_SRC
-
-IPython support.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq ob-ipython-command "~/anaconda3/bin/jupyter") 
-
-(use-package ob-ipython)
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (python . t)
-   (ipython . t)
-   (sh . t)
-))
-#+END_SRC
-
-** GTD Settings
-
-TODO keywords
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq org-todo-keywords '((sequence "TODO" "REVIEW" "DONE")))
 #+END_SRC
 
 * Email
