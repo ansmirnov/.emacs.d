@@ -317,8 +317,8 @@ Flycheck install.
 #+begin_src emacs-lisp :tangle yes
 (use-package flycheck
   :ensure t
-  :init
-  (add-hook 'after-init-hook 'global-flycheck-mode)
+  :hook
+    (prog-mode . flycheck-mode)
 )
 #+end_src
 
