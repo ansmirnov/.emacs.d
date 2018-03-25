@@ -1,4 +1,5 @@
 
+
 #+TITLE: Emacs Config
 #+INFOJS_OPT: view:t toc:t ltoc:t mouse:underline buttons:0 path:https://www.linux.org.ru/tango/combined.css
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
@@ -423,6 +424,11 @@ TODO keywords
 
 
 
+** Org board
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package org-board)
+#+END_SRC
 
 * EXWM
 
