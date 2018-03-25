@@ -305,6 +305,11 @@ Magit install.
   (use-package magit
     :bind 
   ("M-m" . magit) )
+  
+  (use-package magit-lfs
+     :ensure t
+     :pin melpa)
+
 #+end_src
 
 SSH install.
