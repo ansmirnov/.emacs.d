@@ -316,6 +316,8 @@ Magit install.
      :ensure t
      :pin melpa)
 
+  (use-package magit-annex)
+
 #+end_src
 
 SSH install.
