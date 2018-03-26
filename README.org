@@ -214,7 +214,7 @@ Company mode for auto completion in any buffer.
 ** PDF view
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq doc-view-resolution 300)
+(setq doc-view-resolution 200)
 #+END_SRC
 
 * Theme and appearance
