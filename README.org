@@ -46,7 +46,6 @@ Add package archives:
 
   (package-initialize)
 
-
   ;;(package-refresh-contents)
 #+end_src
 
@@ -159,7 +158,6 @@ Use Google Translate for translate text from region.
            ("C-c t" . google-translate-at-point)
            ("C-c T" . google-translate-query-translate)
        )
-
    #+end_src
 
 
@@ -296,7 +294,6 @@ Powerline
 :config
 (powerline-default-theme)
 )
-
 #+END_SRC
 
 Lines below are draft.
