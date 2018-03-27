@@ -46,6 +46,7 @@ Add package archives:
 
   (package-initialize)
 
+
   ;;(package-refresh-contents)
 #+end_src
 
@@ -158,6 +159,7 @@ Use Google Translate for translate text from region.
            ("C-c t" . google-translate-at-point)
            ("C-c T" . google-translate-query-translate)
        )
+
    #+end_src
 
 
@@ -166,7 +168,7 @@ Use Google Translate for translate text from region.
 #+begin_src emacs-lisp :tangle yes
   (use-package ivy
     :diminish ivy-mode
-    :init
+   :init
       ;; (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
       (ivy-mode t)
       (setq ivy-count-format "%d/%d ")
@@ -224,18 +226,32 @@ Company mode for auto completion in any buffer.
 I use different themes on some devices.
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package zenburn-theme)
+;;  (use-package zenburn-theme)
   (use-package material-theme)
 ;;  (load-theme 'zenburn t)
 #+end_src
 
 ** Fonts
 
-I use Anonymous Pro font. Font size is 14.
 
 #+begin_src emacs-lisp :tangle yes
-  (add-to-list 'default-frame-alist '(font . "Anonymous Pro-14" ))
-  (set-face-attribute 'default t :font "Anonymous Pro-14" )
+
+;  (add-to-list 'default-frame-alist '(font . "Anonymous Pro-14" ))
+;  (set-face-attribute 'default t :font "Anonymous Pro-14" )
+
+(use-package faces
+  :ensure nil
+  :init
+  (let ((preferred-font-families '("Consolas"
+                                   "Monospace"
+                                   "DejaVu Sans Mono"
+                                   "Monaco"
+                                   "Hack")))
+    (add-to-list 'face-font-family-alternatives preferred-font-families)
+    (internal-set-alternative-font-family-alist face-font-family-alternatives)
+    (set-face-attribute 'default nil :family (car preferred-font-families) :weight 'regular :width 'semi-condensed :height 140)
+))
+
 #+end_src
 
 ** Window
@@ -557,4 +573,5 @@ test
 )
 
 #+END_SRC
+
 
