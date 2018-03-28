@@ -177,9 +177,9 @@ Use Google Translate for translate text from region.
 Company mode for auto completion in any buffer.
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package company
-    :diminish company-mode
-    :hook
+(use-package company
+  :diminish company-mode
+  :hook
     (after-init . global-company-mode))
 #+end_src
 
@@ -291,6 +291,20 @@ Lines below are draft.
 ;;  #+end_src
 
 
+** All the icons
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package all-the-icons
+  :config
+  (add-to-list
+   'all-the-icons-mode-icon-alist
+   '(package-menu-mode all-the-icons-octicon "package" :v-adjust 0.0)))
+
+
+(use-package all-the-icons-dired
+  :hook
+  (dired-mode . all-the-icons-dired-mode))
+#+END_SRC
 
 * Programming
 
