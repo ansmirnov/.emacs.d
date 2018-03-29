@@ -370,14 +370,22 @@ Flycheck install.
 Add anaconda venv.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
+(setq python "~/anaconda3/bin/python")
+
 (setenv "PATH" (concat (getenv "PATH") "~/anaconda3/bin/"))
 (setq exec-path (append exec-path '("~/anaconda3/bin/")))
+(setq python-shell-interpreter python)
 #+END_SRC
 
 Install elpy.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package elpy)
+(use-package elpy
+:config
+  (setq elpy-rpc-python-command "~/anaconda3/bin/python")
+:hook
+  (python-mode . elpy-mode)
+)
 #+END_SRC
 
 
