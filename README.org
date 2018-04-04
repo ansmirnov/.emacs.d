@@ -225,7 +225,7 @@ I use different themes on some devices.
 
 #+begin_src emacs-lisp :tangle yes
 ;;  (use-package zenburn-theme)
-  (use-package material-theme)
+  (use-package anti-zenburn-theme)
 ;;  (load-theme 'zenburn t)
 #+end_src
 
@@ -242,6 +242,7 @@ I use different themes on some devices.
   :init
   (let ((preferred-font-families '("Consolas"
                                    "Monospace"
+                                   "Anonymous Pro"
                                    "DejaVu Sans Mono"
                                    "Monaco"
                                    "Hack")))
