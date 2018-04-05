@@ -21,17 +21,12 @@ git clone https://github.com/ansmirnov/.emacs.d.git ~/.emacs.d
     
 3. Enjoy.
 
-
 * Personal information
-
 #+BEGIN_SRC emacs-lisp :tangle yes
 (setq user-full-name "Andrey Smirnov"
       user-mail-address "mail@ansmirnov.ru")
 #+END_SRC
-  
-
 * Global configuration
-
 ** Package system initialization
 
 Add package archives:
@@ -68,14 +63,12 @@ Install =use-package= if it not installed.
   (setq use-package-always-ensure t)
 #+end_src
 
-
 ** Configuration settings
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 #+END_SRC
-
 
 ** Better defaults
 
@@ -116,7 +109,6 @@ Better defaults package breaks Ivy. I try to copy it code in my emacs config.
 
 #+END_SRC
 
-
 ** Key bindings
 
 #+begin_src emacs-lisp :tangle yes
@@ -127,7 +119,6 @@ Better defaults package breaks Ivy. I try to copy it code in my emacs config.
   (global-set-key [f12] 'shell) 
 #+end_src
 
-
 ** Printing
 
 I use emacs for printing.
@@ -137,7 +128,6 @@ This settings makes imprints beautiful.
 #+begin_src emacs-lisp :tangle yes
   (setq lpr-switches '("-o cpi=11" "-o page-left=54"))
 #+end_src
-
 
 ** Translate text using Google Translate
 
@@ -159,7 +149,6 @@ Use Google Translate for translate text from region.
            ("C-c T" . google-translate-query-translate)
        )
    #+end_src
-
 
 ** Auto completion
 
@@ -183,7 +172,6 @@ Company mode for auto completion in any buffer.
     (after-init . global-company-mode))
 #+end_src
 
-
 ** Projects
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -194,13 +182,11 @@ Company mode for auto completion in any buffer.
 ;)
 #+END_SRC
 
-
 ** Change "yes or no" to "y or n"
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
-
 
 ** Russian keyboard
 
@@ -210,7 +196,6 @@ Company mode for auto completion in any buffer.
   (reverse-im-activate "russian-computer"))
 #+END_SRC
 
-
 ** PDF view
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -218,20 +203,7 @@ Company mode for auto completion in any buffer.
 #+END_SRC
 
 * Theme and appearance
-
-** Themes
-
-I use different themes on some devices.
-
-#+begin_src emacs-lisp :tangle yes
-;;  (use-package zenburn-theme)
-  (use-package anti-zenburn-theme)
-;;  (load-theme 'zenburn t)
-#+end_src
-
 ** Fonts
-
-
 #+begin_src emacs-lisp :tangle yes
 
 ;  (add-to-list 'default-frame-alist '(font . "Anonymous Pro-14" ))
@@ -252,7 +224,13 @@ I use different themes on some devices.
 ))
 
 #+end_src
+** Themes
+I use different themes on some devices.
 
+#+begin_src emacs-lisp :tangle yes
+  (use-package intellij-theme)
+  (load-theme 'intellij t)
+#+end_src
 ** Window
 
 Disable menubar, toolbar. scrolls bar.
@@ -304,7 +282,6 @@ Lines below are draft.
 ;;    (set-face-attribute 'default t :font "DejaVu Sans Mono-13" )
 ;;  #+end_src
 
-
 ** All the icons
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -319,7 +296,6 @@ Lines below are draft.
   :hook
   (dired-mode . all-the-icons-dired-mode))
 #+END_SRC
-
 * Programming
 
 ** Common tools
@@ -395,8 +371,6 @@ Install elpy.
 #+begin_src emacs-lisp :tangle yes
   (use-package php-mode)
 #+end_src
-
-
 * Documentation
 
 Add markdown support.
@@ -410,7 +384,6 @@ Add markdown support.
       ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "multimarkdown"))
 #+end_src
-
 
 * Org mode
 
@@ -478,7 +451,6 @@ TODO keywords
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package org-board)
 #+END_SRC
-
 * EXWM
 
 ** EXWM packages and settings
