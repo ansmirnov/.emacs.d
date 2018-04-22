@@ -1,0 +1,11 @@
+# Ignore everything
+
+
+# But not these files
+!.gitignore
+!README.md
+!README.org
+!emacs-init.org
+!init.el
+!xinitrc
+
