@@ -320,7 +320,7 @@ you should place your code here."
 
   (load-theme 'spacemacs-light t)
 
-  (setq gc-cons-threshold most-positive-fixnum)
+  (setq gc-cons-threshold (* 256 1024 1024))
 
   )
 
